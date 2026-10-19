@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026학년도 2학기 학교생활기록부 기재요령 및 교차점검 연수</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{--bg:#ffffff;--panel:#f4f6f9;--ink:#18202e;--sub:#5b6577;--muted:#9aa3b2;--line:#e3e7ee;
+--acc:#1f5fbf;--accbg:#eaf1fc;--hl:#ffe68a;--red:#c0392b;--redbg:#fdeeec}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Pretendard,"Noto Sans KR",system-ui,sans-serif;overflow:hidden;word-break:keep-all}
+.deck{position:relative;height:calc(100vh - 58px)}
+.slide{position:absolute;inset:0;padding:5vh 7vw 3vh;display:flex;flex-direction:column;justify-content:center;opacity:0;transform:translateY(16px);transition:opacity .4s,transform .4s;pointer-events:none;overflow-y:auto}
+.slide.on{opacity:1;transform:none;pointer-events:auto}
+.inner{max-width:1200px;width:100%;margin:0 auto}
+
+/* 강조 */
+strong{font-weight:800}
+.hl{background:linear-gradient(transparent 58%,var(--hl) 58%);font-weight:800}
+.acc{color:var(--acc);font-weight:800}
+.no-ok{color:var(--red);font-weight:800}
+.sub{display:block;color:var(--sub);font-size:.88em;margin-top:8px;line-height:1.65}
+.chip{display:inline-block;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:6px;background:var(--accbg);color:var(--acc);white-space:nowrap}
+.chip.red{background:var(--redbg);color:var(--red)}
+
+/* 표지 */
+.cover{border-left:10px solid var(--acc);padding-left:4vw}
+.cover .kicker{font-size:clamp(15px,1.4vw,20px);font-weight:700;color:var(--acc);letter-spacing:.04em;margin:0}
+.cover h1{font-size:clamp(40px,6.2vw,96px);line-height:1.15;margin:.3em 0 .4em;font-weight:800;letter-spacing:-.025em}
+.topics{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2.2em;padding:0;list-style:none}
+.topics li{font-size:clamp(14px,1.3vw,19px);padding:7px 14px;border:1px solid var(--line);border-radius:8px;color:var(--sub);background:var(--panel)}
+.stats{display:flex;gap:4vw;flex-wrap:wrap}
+.stat .l{font-size:clamp(14px,1.2vw,17px);color:var(--sub);margin-bottom:4px}
+.stat .n{font-size:clamp(24px,2.6vw,40px);font-weight:800}
+.stat .n small{font-size:.55em;color:var(--sub);font-weight:600;margin-left:6px}
+
+/* 슬라이드 머리 */
+.hd{display:flex;align-items:flex-end;gap:22px;margin-bottom:3.5vh;padding-bottom:16px;border-bottom:3px solid var(--ink)}
+.hd .no{font-size:clamp(38px,4.6vw,68px);font-weight:800;color:var(--acc);line-height:.9;font-variant-numeric:tabular-nums}
+.hd .kicker{margin:0 0 4px;font-size:clamp(13px,1.15vw,16px);font-weight:700;color:var(--sub);letter-spacing:.05em}
+.hd h2{margin:0;font-size:clamp(26px,3vw,46px);font-weight:800;letter-spacing:-.015em;line-height:1.2}
+
+/* 행 목록 */
+.rows{font-size:clamp(15px,1.3vw,20px);line-height:1.7}
+.row{display:grid;grid-template-columns:minmax(140px,220px) 1fr auto;gap:28px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:start}
+.row .k{font-weight:800;font-size:1.08em}
+.row .k em{display:block;font-style:normal;font-weight:600;font-size:.8em;color:var(--sub)}
+.row .when{text-align:right;display:flex;flex-direction:column;gap:6px;align-items:flex-end}
+.rows.two .row{grid-template-columns:minmax(140px,220px) 1fr}
+
+/* 타임라인 */
+.tline{list-style:none;margin:0;padding:0;font-size:clamp(15px,1.3vw,20px);line-height:1.6}
+.tline li{display:grid;grid-template-columns:150px 1fr;gap:26px;position:relative;padding:12px 0}
+.tline li::before{content:"";position:absolute;left:162px;top:0;bottom:0;width:2px;background:var(--line)}
+.tline li::after{content:"";position:absolute;left:157px;top:21px;width:12px;height:12px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px #fff}
+.tline li.end::after{background:var(--red)}
+.tline .d{font-weight:800;color:var(--acc);text-align:right;padding-right:22px;white-space:nowrap}
+.tline .t{padding-left:22px}
+
+/* 표 */
+table{width:100%;border-collapse:collapse;font-size:clamp(14px,1.2vw,19px)}
+th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.55}
+th{font-weight:700;color:var(--sub);font-size:.88em;border-bottom:2px solid var(--ink)}
+td.d{white-space:nowrap;font-weight:800;color:var(--acc);width:1%}
+.swap td:first-child{color:var(--muted);text-decoration:line-through;text-decoration-color:#c9ced8}
+.swap td.ar{color:var(--muted);width:1%;padding:12px 4px}
+.swap td:last-child{font-weight:700}
+.two-tables{display:grid;grid-template-columns:repeat(auto-fit,minmax(380px,1fr));gap:4vw}
+
+/* 단계 */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:4vh;counter-reset:s}
+.step{padding:20px 22px 20px 0;border-top:6px solid var(--acc);margin-right:14px;font-size:clamp(15px,1.25vw,19px);line-height:1.6}
+.step:nth-child(2){border-color:#5a8ad6}.step:nth-child(3){border-color:#9db8e6}
+.step .s{font-size:.85em;font-weight:800;color:var(--acc)}
+.step h3{margin:4px 0 6px;font-size:clamp(18px,1.6vw,24px)}
+
+/* 2열 */
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:4vw;font-size:clamp(15px,1.25vw,19px);line-height:1.65}
+.cols h3{font-size:clamp(17px,1.5vw,22px);margin:0 0 6px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.cols ul{list-style:none;margin:0;padding:0}
+.cols li{padding:10px 0 10px 18px;border-bottom:1px solid var(--line);position:relative}
+.cols li::before{content:"";position:absolute;left:2px;top:20px;width:6px;height:6px;background:var(--acc);border-radius:1px}
+.foot{margin-top:2.5vh;color:var(--sub);font-size:clamp(14px,1.15vw,17px)}
+.alert{margin-top:3vh;padding:18px 22px;border-left:6px solid var(--red);background:var(--redbg);font-size:clamp(15px,1.25vw,19px);line-height:1.7}
+.alert b{color:var(--red)}
+
+footer{position:fixed;left:0;right:0;bottom:0;height:58px;display:flex;align-items:center;gap:18px;padding:0 22px;border-top:1px solid var(--line);background:var(--bg)}
+.prog{position:absolute;left:0;top:-1px;height:3px;background:var(--acc);transition:width .4s}
+footer .org{font-size:14px;color:var(--sub);white-space:nowrap}
+footer .cur{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.num{font-size:14px;color:var(--sub);font-variant-numeric:tabular-nums}
+.nav{width:44px;height:38px;border:1px solid var(--line);background:#fff;border-radius:8px;font-size:18px;cursor:pointer;color:var(--ink)}
+.nav:hover{background:var(--panel)}
+
+@media (max-width:760px){
+  .row,.rows.two .row{grid-template-columns:1fr;gap:6px}
+  .row .when{align-items:flex-start;flex-direction:row}
+  .steps{grid-template-columns:1fr}
+  .tline li{grid-template-columns:96px 1fr}
+  .tline li::before{left:108px}.tline li::after{left:103px}
+  footer .org{display:none}
+}
+@media print{html,body{overflow:visible;height:auto}.deck{height:auto}.slide{position:relative;opacity:1;transform:none;page-break-after:always;min-height:100vh}footer{display:none}}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 표지 -->
+<section class="slide"><div class="inner cover">
+  <p class="kicker">교원 연수 · 2026학년도 2학기</p>
+  <h1>학교생활기록부<br>기재요령과 교차점검</h1>
+  <ul class="topics"><li>교차점검 지침</li><li>기재 금지와 유의사항</li><li>항목별 기재 방법</li><li>NEIS 매뉴얼</li></ul>
+  <div class="stats">
+    <div class="stat"><div class="l">생기부 최종 마무리</div><div class="n">2026. 12. 24.<small>(목)</small></div></div>
+    <div class="stat"><div class="l">방학식·졸업식 · 출결 마감</div><div class="n">12. 28.<small>(월)</small></div></div>
+  </div>
+</div></section>
+
+<!-- 01 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">01</span><div><p class="kicker">핵심 원칙</p><h2>2학기 기재 3대 원칙과 업무 분담</h2></div></div>
+  <div class="rows">
+    <div class="row"><div class="k">① 과세특<em>교과 세부능력 및 특기사항</em></div>
+      <div class="v"><span class="hl">전 학생 100% 입력</span> (단 1명도 빠짐없이)<br>수업 미참여·장기결석생도 <strong>사유를 적어요.</strong></div>
+      <div class="when"><span class="chip">~12/9(수)</span></div></div>
+    <div class="row"><div class="k">② 창체<em>자율자치·진로·동아리</em></div>
+      <div class="v"><span class="hl">누가기록 + 이수시간 + 특기사항</span><br>3가지 세트를 모두 완결해요.
+        <span class="sub">진로교사 — 특기 자료 전달, NEIS 누가기록 입력 <b>~12/7</b><br>담임 — 진로 특기사항 기재 <b>~12/14</b>, 누가·이수 최종 확인 <b>~12/24</b></span></div>
+      <div class="when"><span class="chip">~12/24(목)</span></div></div>
+    <div class="row"><div class="k">③ 행발<em>행동특성 및 종합의견</em></div>
+      <div class="v">누가기록 <span class="hl">학기당 2회 이상</span> 입력<br>2학기 특기사항 작성</div>
+      <div class="when"><span class="chip">누가 ~12/3</span><span class="chip">특기 ~12/7</span></div></div>
+  </div>
+</div></section>
+
+<!-- 02 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">02</span><div><p class="kicker">일정 · 입력</p><h2>12월 입력 마감 일정</h2></div></div>
+  <ul class="tline">
+    <li><span class="d">~12/3(목)</span><span class="t">진로희망분야 입력 <span class="sub" style="display:inline;margin:0">(미정 시 '진로탐색 중임.')</span><br>행발 누가기록 <strong>2회 완료</strong></span></li>
+    <li><span class="d">~12/7(월)</span><span class="t">부서별 창체 특기자료·진로 특기자료 전달<br>행발 <strong>특기사항 마감</strong></span></li>
+    <li><span class="d">~12/9(수)</span><span class="t"><span class="hl">과세특 마감</span> (전 학생)</span></li>
+    <li><span class="d">12/11(금)</span><span class="t">마지막 동아리 (동아리발표회)<br>동아리 누가기록·이수시간 완료</span></li>
+    <li><span class="d">~12/14(월)</span><span class="t">창체 자율자치·진로·동아리 <strong>특기사항 마감</strong></span></li>
+    <li><span class="d">~12/18(금)</span><span class="t">창체 자율자치 누가기록·이수시간 완료<br><span class="sub" style="margin:0">12/17 마지막 자율자치 후</span></span></li>
+    <li class="end"><span class="d">12/24(목)</span><span class="t">진로활동 누가기록·이수시간 완료<br><span class="hl">생기부 최종 마무리</span></span></li>
+  </ul>
+</div></section>
+
+<!-- 03 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">03</span><div><p class="kicker">일정 · 점검과 제출</p><h2>점검과 제출 일정</h2></div></div>
+  <table>
+    <tr><th>날짜</th><th>할 일</th></tr>
+    <tr><td class="d">12/14~15</td><td>담임 1차 점검 (학생부반영, 항목별 출력)<br>출결 마감</td></tr>
+    <tr><td class="d">12/16(수)</td><td>전 교사 집합 교차점검 (6·7교시)<br>점검표 담당자 제출 <span class="hl">16:00까지</span></td></tr>
+    <tr><td class="d">12/17(목)</td><td>마지막 자율자치 (7교시)<br><strong>지적사항 수정 완료</strong> · 점검표지 제출</td></tr>
+    <tr><td class="d">12/18(금)</td><td>1차 점검 완료 · 진급/졸업사정회</td></tr>
+    <tr><td class="d">12/21~24</td><td>최종 점검(자료검증)과 오류 보완<br><span class="hl">12/24 최종 마감</span></td></tr>
+    <tr><td class="d">12/28(월)</td><td>방학식·졸업식 · <strong>당일 출결 마감</strong></td></tr>
+    <tr><td class="d">2027. 1/6(수)</td><td>고양교육지원청 자체점검표 제출 <span class="hl">17:00까지</span><br><span class="sub" style="margin:0">K-에듀파인 교육데이터포털 PDF</span></td></tr>
+    <tr><td class="d">1/11~13</td><td>교육지원청 현장점검 및 컨설팅 (컴퓨터실)</td></tr>
+  </table>
+</div></section>
+
+<!-- 04 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">04</span><div><p class="kicker">교차점검</p><h2>3단계 수직·수평 교차점검</h2></div></div>
+  <div class="steps">
+    <div class="step"><span class="s">1차 · 12/14~15</span><h3>담임교사</h3>담당 학급 학생부반영, 출결 마감<br>항목별 출력과 서류 점검</div>
+    <div class="step"><span class="s">2차</span><h3>옆반 담임 (+1반)</h3>과세특과 창체 교차 점검</div>
+    <div class="step"><span class="s">3차</span><h3>부담임</h3>창체와 과세특 교차 점검</div>
+  </div>
+  <table>
+    <tr><th>12/16(수) 집합 점검</th><th>2차 · 옆반 담임</th><th>3차 · 부담임</th></tr>
+    <tr><td class="d">6교시 15:00~15:50</td><td><strong>과세특</strong></td><td>창체 (자율자치·진로·동아리)</td></tr>
+    <tr><td class="d">7교시 16:00~16:50</td><td>창체 (자율자치·진로·동아리)</td><td><strong>과세특</strong></td></tr>
+  </table>
+  <p class="foot">점검표는 <span class="hl">16:00까지</span> 담당자에게 제출해요.</p>
+</div></section>
+
+<!-- 05 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">05</span><div><p class="kicker">교차점검</p><h2>점검 후 이렇게 마무리해요</h2></div></div>
+  <div class="rows">
+    <div class="row"><div class="k">점검 환류</div>
+      <div class="v">담임이 교차점검 결과를 받아<br>해당 교과·동아리 교사에게 <strong>지적·수정사항을 바로 안내</strong>해요.</div>
+      <div class="when"><span class="chip">12/16(수)</span></div></div>
+    <div class="row"><div class="k">수정 완료</div>
+      <div class="v">수정을 마치고<br>점검 서류(<strong>자체점검표 표지</strong>)를 제출해요.</div>
+      <div class="when"><span class="chip">12/17(목)</span></div></div>
+    <div class="row"><div class="k">사정회</div>
+      <div class="v">1차 점검 완료를 확인하고<br>진급/졸업사정회를 열어요.</div>
+      <div class="when"><span class="chip">12/18(금)</span></div></div>
+    <div class="row"><div class="k">교육청</div>
+      <div class="v">자체점검표 제출 <span class="hl">1/6(수) 17:00까지</span><br>현장점검단 방문 점검과 컨설팅</div>
+      <div class="when"><span class="chip">1/6</span><span class="chip">1/11~13</span></div></div>
+  </div>
+</div></section>
+
+<!-- 06 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">06</span><div><p class="kicker">작성 원칙</p><h2>학교생활기록부 작성 기본 원칙</h2></div></div>
+  <div class="rows two">
+    <div class="row"><div class="k">직접 관찰·평가</div>
+      <div class="v">평소 수업과 교육활동 중<br><span class="hl">교사가 직접 관찰하고 평가한 내용</span>을 근거로 입력해요.</div></div>
+    <div class="row"><div class="k">한글 작성</div>
+      <div class="v">문자는 <strong>한글</strong>, 숫자는 <strong>아라비아 숫자</strong><br>전문용어도 한글로 풀어 써요.
+        <span class="sub">영문 허용 예 — CEO, PD, IT, PAPS, SNS, PPT, AI, TV, POP, CF, 단위, 외국인 성명, 도서명</span></div></div>
+    <div class="row"><div class="k">명사형 종결</div>
+      <div class="v"><span class="hl">~함 / ~을 파악함 / ~을 보여줌</span></div></div>
+    <div class="row"><div class="k">서식 제한</div>
+      <div class="v">특수문자와 문단 구분 기호(번호)는<br><span class="no-ok">쓰지 않아요.</span></div></div>
+  </div>
+</div></section>
+
+<!-- 07 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">07</span><div><p class="kicker">작성 원칙</p><h2>학생 작성 자료 · 셀프 학생부 · 생성형 AI</h2></div></div>
+  <div class="rows two">
+    <div class="row"><div class="k">학생 작성 자료<em>5가지만 활용</em></div>
+      <div class="v"><span class="hl">동료평가서 · 자기평가서 · 수업산출물 · 소감문 · 독후감</span>
+        <span class="sub">수업산출물에는 수행평가 결과물이 포함돼요.</span>
+        <span class="chip red" style="margin-top:8px">금지</span> 학생 글을 그대로 인용하거나 복사해 입력</div></div>
+    <div class="row"><div class="k">셀프 학생부<em>금지</em></div>
+      <div class="v">학생에게 서술형 항목을 <span class="no-ok">직접 써서 내게 하지 않아요.</span><br>'~을 느낌', '~을 깨달음' 대신<br><span class="hl">교사가 본 사실과 행동 변화</span>로 써요.</div></div>
+    <div class="row"><div class="k">생성형 AI<em>무단 사용 금지</em></div>
+      <div class="v">AI가 만든 문장을 <span class="no-ok">그대로 입력하지 않아요.</span><br>문장 다듬기에 썼더라도<br><span class="hl">허위·과장 여부와 기재 금지 사항</span>을 꼭 확인해요.</div></div>
+  </div>
+</div></section>
+
+<!-- 08 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">08</span><div><p class="kicker">기재 금지 ①</p><h2>어떤 항목에도 쓸 수 없어요</h2></div></div>
+  <div class="cols">
+    <div><h3>시험 · 대회 · 수상</h3><ul>
+      <li><strong>공인어학시험</strong> 참여·성적·수상<br><span class="sub" style="margin:0">TOEIC, TOEFL, TEPS, HSK, JPT, JLPT, 한자능력검정 등</span></li>
+      <li><strong>교내외 대회</strong> 참여·성적·수상<br>시상 없는 '대회' 명칭도 불가 <span class="sub" style="display:inline;margin:0">(체육대회 → 체육행사)</span></li>
+      <li><strong>교외 기관·단체 수상</strong> (표창장, 감사장, 공로상 등)</li>
+      <li>교내외 <strong>인증시험</strong> 참여·성적</li>
+      <li><strong>모의고사·전국연합학력평가</strong> 성적과 관련 수상</li></ul></div>
+    <div><h3>논문 · 출간 · 지식재산권</h3><ul>
+      <li><strong>논문</strong> 투고·등재·학회 발표<br><span class="sub" style="margin:0">소논문 관련 일체</span></li>
+      <li><strong>도서 출간</strong> 사실</li>
+      <li>특허, 실용신안, 상표, 디자인 등<br><strong>출원·등록 사실</strong></li></ul></div>
+  </div>
+  <p class="foot">창체, 과세특, 행발, 독서 등 <span class="hl">모든 항목에 적용</span>돼요.</p>
+</div></section>
+
+<!-- 09 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">09</span><div><p class="kicker">기재 금지 ②</p><h2>어떤 항목에도 쓸 수 없어요</h2></div></div>
+  <div class="cols">
+    <div><h3>개인 · 가정 정보</h3><ul>
+      <li>어학연수, 봉사 등 <strong>해외 활동 실적</strong></li>
+      <li><strong>부모(친인척 포함)의 사회·경제적 지위</strong> 암시<br><span class="sub" style="margin:0">직업명, 직장명, 직위명, '어려운 환경에서도~' 등</span></li>
+      <li><strong>장학생·장학금</strong> 관련 내용</li></ul></div>
+    <div><h3>기관명 · 자격증</h3><ul>
+      <li>특정 <strong>대학명, 기관명, 상호명, 강사명</strong><br><span class="sub" style="margin:0">교육 관련 기관은 예외</span></li>
+      <li><strong>자격증 명칭과 취득 사실</strong><br><span class="sub" style="margin:0">'자격증 취득 및 국가직무능력표준 이수상황' 외 항목 금지</span></li></ul></div>
+  </div>
+  <div class="alert"><b>고교 블라인드</b> — 재학 중인 고등학교를 알 수 있는 내용은 <b>모두 금지</b>예요.<br>
+    학교명, 재단명, 축제명 '느티나무제', 별칭 '신비' 등이 해당해요.<br>
+    <span style="color:var(--sub)">수상 수여기관, 봉사 장소·주관기관은 제외 · 정정대장에도 고교 정보를 넣지 않아요.</span></div>
+</div></section>
+
+<!-- 10 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">10</span><div><p class="kicker">대체 표현</p><h2>상표명·플랫폼명은 이렇게 바꿔요</h2></div></div>
+  <div class="two-tables">
+  <table class="swap">
+    <tr><th>쓰지 않아요</th><th></th><th>이렇게 써요</th></tr>
+    <tr><td>구글, 네이버, 다음</td><td class="ar">→</td><td>포털사이트, 인터넷 검색 엔진</td></tr>
+    <tr><td>구글 클래스룸, EBS 온라인클래스</td><td class="ar">→</td><td>교육 플랫폼, 학습 플랫폼</td></tr>
+    <tr><td>유튜브, 넷플릭스, 티빙, 디즈니+</td><td class="ar">→</td><td>동영상 플랫폼</td></tr>
+    <tr><td>블로, 프리미어 프로, 파이널컷</td><td class="ar">→</td><td>영상 편집 프로그램</td></tr>
+    <tr><td>유튜버</td><td class="ar">→</td><td>동영상 크리에이터</td></tr>
+    <tr><td>카카오톡</td><td class="ar">→</td><td>모바일 메신저</td></tr>
+    <tr><td>패들렛, 띵커벨, 알로</td><td class="ar">→</td><td>온라인 협업 플랫폼</td></tr>
+  </table>
+  <table class="swap">
+    <tr><th>쓰지 않아요</th><th></th><th>이렇게 써요</th></tr>
+    <tr><td>MBTI / 홀랜드 검사</td><td class="ar">→</td><td>성격 유형 검사 / 직업 선호도 검사</td></tr>
+    <tr><td>줌</td><td class="ar">→</td><td>화상 회의 시스템</td></tr>
+    <tr><td>챗GPT, 뤼튼, 바드, 하이퍼클로바 X</td><td class="ar">→</td><td>생성형 인공지능</td></tr>
+    <tr><td>게더타운, 제페토, 이프랜드</td><td class="ar">→</td><td>메타버스 플랫폼</td></tr>
+    <tr><td>미리캔버스, 망고보드, 캔바</td><td class="ar">→</td><td>디자인 제작 플랫폼</td></tr>
+    <tr><td>아이패드, 갤럭시탭, 크롬북</td><td class="ar">→</td><td>태블릿 PC</td></tr>
+    <tr><td>커리어넷, 메이저맵</td><td class="ar">→</td><td>진로 정보 사이트</td></tr>
+  </table>
+  </div>
+</div></section>
+
+<!-- 11 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">11</span><div><p class="kicker">항목별 기재</p><h2>출결상황 · 교과학습발달상황</h2></div></div>
+  <div class="rows">
+    <div class="row"><div class="k">출결상황</div>
+      <div class="v"><strong>기타결석</strong>은 <span class="hl">1일부터</span> 사유 기재 <span class="sub" style="display:inline;margin:0">(예: 모간병 1일)</span><br>
+        같은 종류로 <span class="hl">연속 7일 이상</span> 결석하면 사유 기재 <span class="sub" style="display:inline;margin:0">(예: 학교생활부적응 27일)</span>
+        <span class="sub">1차 점검(12/14~15) 때 출결 마감 → 12/28(월) 방학식 당일 최종 마감</span></div>
+      <div class="when"><span class="chip">12/28(월)</span></div></div>
+    <div class="row"><div class="k">과세특</div>
+      <div class="v"><span class="hl">전 학생 입력</span><br>장기결석·수업 미참여도 사유를 입력해요.
+        <span class="sub">예: '수행평가 및 수업활동 안내에 관한 수업에 참여함.'<br>예: '장기결석으로 특이사항 없음.'</span>
+        <span class="sub"><b>1·2학년 (2022 개정)</b> — 전문교과 전공일반·실무 과목은 이수한 <b>모든 능력단위</b>를 문장으로 기재<br><b>3학년 (2015 개정)</b> — <b>특기할 만한 능력단위</b>를 포함해 기재</span></div>
+      <div class="when"><span class="chip">~12/9(수)</span></div></div>
+  </div>
+</div></section>
+
+<!-- 12 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">12</span><div><p class="kicker">항목별 기재 · 3대 세트 = 누가기록 + 이수시간 반영·확인 + 특기사항</p><h2>창의적 체험활동</h2></div></div>
+  <div class="rows">
+    <div class="row"><div class="k">자율자치</div>
+      <div class="v">임원 <span class="hl">재임기간</span>을 정확히 적어요.
+        <span class="sub">1·2학년 학급자치회 회장(2026.03.01.-2027.02.28.)<br>3학년 전교 학생자치회 회장(2026.03.01.-2026.12.28.)</span></div>
+      <div class="when"><span class="chip">특기 ~12/14</span><span class="chip">누가·이수 ~12/18</span></div></div>
+    <div class="row"><div class="k">동아리</div>
+      <div class="v">정규동아리 — <strong>동아리명, 이수시간, 특기사항</strong><br>12/11 동아리발표회 후 누가·이수 완료</div>
+      <div class="when"><span class="chip">누가·이수 12/11</span><span class="chip">특기 ~12/14</span></div></div>
+    <div class="row"><div class="k">진로</div>
+      <div class="v">진로교사 — 자료 전달·누가기록 입력 <b>~12/7</b><br>담임 — 특기사항 <b>~12/14</b>, 누가·이수 최종 확인 <b>~12/24</b>
+        <span class="sub">진로 미정 시 '진로탐색 중임.'</span></div>
+      <div class="when"><span class="chip">~12/24</span></div></div>
+    <div class="row"><div class="k">직업기초<br>능력평가</div>
+      <div class="v">1~2학년 <strong>"자가진단평가에 참여함"</strong><br>3학년 <strong>"본평가에 참여함"</strong>
+        <span class="sub">영역: 의사소통 국어·영어, 수리활용, 문제해결, 직무적응</span></div>
+      <div class="when"></div></div>
+    <div class="row"><div class="k">봉사</div>
+      <div class="v">개인 봉사는 <strong>대입 미반영</strong> · 정규 봉사 <span class="hl">하루 최대 8시간</span><br>특기사항은 제목만 간략히</div>
+      <div class="when"></div></div>
+  </div>
+</div></section>
+
+<!-- 13 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">13</span><div><p class="kicker">항목별 기재</p><h2>행동특성 및 종합의견 · 독서활동</h2></div></div>
+  <div class="rows">
+    <div class="row"><div class="k">행발</div>
+      <div class="v">학기당 <span class="hl">누가기록 2회 이상 필수</span>
+        <span class="sub" style="margin:2px 0 8px">민원이 생기면 중요한 법적·행정적 근거가 돼요.</span>
+        2학기 특기사항 작성<br>장단점은 <strong>누가기록에 근거</strong>해 쓰고,<br>단점은 <strong>변화 가능성</strong>을 함께 써요.</div>
+      <div class="when"><span class="chip">누가 ~12/3</span><span class="chip">특기 ~12/7</span></div></div>
+    <div class="row"><div class="k">독서활동</div>
+      <div class="v"><span class="hl">'도서명(저자)'</span> 형식으로만 입력해요.<br>도서명에 상호명·기관명이 들어 있으면 그대로 써도 돼요.
+        <span class="sub">대입에는 반영되지 않아요.</span></div>
+      <div class="when"></div></div>
+  </div>
+</div></section>
+
+<!-- 14 -->
+<section class="slide"><div class="inner">
+  <div class="hd"><span class="no">14</span><div><p class="kicker">부록</p><h2>NEIS 실무 편의 기능</h2></div></div>
+  <div class="rows two">
+    <div class="row"><div class="k">과세특 맞춤법<em>교과교사</em></div>
+      <div class="v">[성적처리] → [과목별세부능력및특기사항]<br>→ 입력창 여백 우클릭 → <strong>[맞춤법검사]</strong><br>→ 파란 오류 단어 더블클릭 → 연두색 추천 단어 더블클릭 → <strong>[적용]</strong></div></div>
+    <div class="row"><div class="k">학급 전체 점검<em>담임교사</em></div>
+      <div class="v"><strong>맞춤법</strong> — [학교생활기록부] → [학생부반영] → [맞춤법검사] 탭에서 항목 선택 후 검사<br>
+        <strong>단어 일괄 수정</strong>(교과교사) — [문자열 바꾸기] → 찾을·바꿀 내용 → [적용]<br>
+        <strong>수정 확인</strong> — [학생부 항목별 조회]에서 단어 검색 → 형광펜 표시</div></div>
+    <div class="row"><div class="k">동아리 이수시간<em>등록·반영</em></div>
+      <div class="v">[동아리활동관리] → [이수시간기준등록]<br>날짜·교시별 출석 체크 후 [저장]<br>→ [동아리활동 학생부 자료]에서 <strong>[이수시간반영]</strong>
+        <span class="sub"><b>'이수시간'</b>과 <b>'누가기록 이수시간 합계'</b>가 같은지 대조해요.</span></div></div>
+  </div>
+</div></section>
+
+</div>
+
+<footer>
+  <div class="prog" id="prog"></div>
+  <span class="org">신일비즈니스고등학교 · 생기부 연수</span>
+  <span class="cur" id="cur"></span>
+  <span class="num" id="num"></span>
+  <button class="nav" id="prev" aria-label="이전">←</button>
+  <button class="nav" id="next" aria-label="다음">→</button>
+</footer>
+
+<script>
+const slides = [...document.querySelectorAll('.slide')];
+let cur = Math.min(Math.max(parseInt(location.hash.slice(1)) - 1 || 0, 0), slides.length - 1);
+function go(n){
+  cur = Math.min(Math.max(n, 0), slides.length - 1);
+  slides.forEach((s, i) => s.classList.toggle('on', i === cur));
+  const h = slides[cur].querySelector('h2, h1');
+  document.getElementById('cur').textContent = cur ? h.textContent : '';
+  document.getElementById('num').textContent = (cur + 1) + ' / ' + slides.length;
+  document.getElementById('prog').style.width = ((cur + 1) / slides.length * 100) + '%';
+  history.replaceState(null, '', '#' + (cur + 1));
+}
+document.getElementById('prev').onclick = () => go(cur - 1);
+document.getElementById('next').onclick = () => go(cur + 1);
+document.addEventListener('keydown', e => {
+  if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){ e.preventDefault(); go(cur + 1); }
+  if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){ e.preventDefault(); go(cur - 1); }
+  if(e.key === 'Home') go(0);
+  if(e.key === 'End') go(slides.length - 1);
+});
+let sx = null;
+document.addEventListener('touchstart', e => sx = e.touches[0].clientX, {passive:true});
+document.addEventListener('touchend', e => {
+  if(sx === null) return;
+  const dx = e.changedTouches[0].clientX - sx;
+  if(Math.abs(dx) > 50) go(cur + (dx < 0 ? 1 : -1));
+  sx = null;
+});
+go(cur);
+</script>
+</body>
+</html>
