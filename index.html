@@ -118,6 +118,10 @@ code.nu{font-family:inherit;font-weight:800;color:var(--acc);background:none}
 .lb img{max-width:100%;max-height:100%;border-radius:6px;background:#fff}
 @media (max-width:760px){.rows.two .row.has-shot{grid-template-columns:1fr}}
 @media print{.lb{display:none!important}.shot{break-inside:avoid}}
+.scope{margin:0 0 1.6vh;padding:12px 16px;border-left:6px solid var(--acc);background:#fff;border-radius:8px;font-size:clamp(15px,1.25vw,19px);line-height:1.6}
+.scope span{display:block;color:var(--sub);font-size:.86em}
+.who-when td.d{white-space:normal;width:24%}
+.who-when td,.who-when th{text-align:center}.who-when td.d,.who-when th:first-child{text-align:left}
 footer{position:fixed;left:0;right:0;bottom:0;height:58px;display:flex;align-items:center;gap:18px;padding:0 22px;border-top:1px solid var(--line);background:var(--bg)}
 .prog{position:absolute;left:0;top:-1px;height:3px;background:var(--acc);transition:width .4s}
 footer .org{font-size:14px;color:var(--sub);white-space:nowrap}
@@ -209,7 +213,7 @@ footer .cur{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hi
     <tr><td class="d">12/17(목)</td><td>마지막 자율자치 (7교시)<br><strong>지적사항 수정 완료</strong></td></tr>
     <tr><td class="d">12/18(금)</td><td>1차 점검 완료 · 진급/졸업사정회</td></tr>
     <tr><td class="d">12/21(월)</td><td>담임 <strong>자격증철</strong> 담당자 제출 <span class="sub" style="display:inline;margin:0">(수합·생기부 반영 후)</span></td></tr>
-    <tr><td class="d">12/23(수)</td><td>점검표·점검표지 담당자 제출 <span class="hl">16:50까지(퇴청 전)</span></td></tr>
+    <tr><td class="d">12/23(수)</td><td><strong>자체점검표(온라인)</strong> ○ 표시·서명 제출 마감 <span class="hl">16:50까지(퇴청 전)</span></td></tr>
     <tr><td class="d">12/21~24</td><td>최종 점검(자료검증)과 오류 보완 · <span class="hl">12/24 최종 마감</span></td></tr>
     <tr><td class="d">12/28(월)</td><td>방학식·졸업식 · <strong>당일 출결 마감</strong></td></tr>
     <tr><td class="d">2027. 1/6(수)</td><td>고양교육지원청 자체점검표 제출 <span class="hl">17:00까지</span><br><span class="sub" style="margin:0">K-에듀파인 교육데이터포털 PDF</span></td></tr>
@@ -222,15 +226,18 @@ footer .cur{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hi
   <div class="hd"><span class="no">04</span><div><p class="kicker">교차점검</p><h2>3단계 수직·수평 교차점검</h2></div></div>
   <div class="steps">
     <div class="step"><span class="s">1차 · 12/14~15</span><h3>담임교사</h3>학생부반영(전체반영)<br>학교생활기록부Ⅱ 전체 출력·점검</div>
-    <div class="step"><span class="s">2차</span><h3>인접 담임</h3>과세특과 창체 교차 점검</div>
-    <div class="step"><span class="s">3차</span><h3>부담임</h3>창체와 과세특 교차 점검</div>
+    <div class="step"><span class="s">2차</span><h3>인접 담임</h3>학교생활기록부Ⅱ 출력물로<br>2026년 기록 전 항목 점검</div>
+    <div class="step"><span class="s">3차</span><h3>부담임</h3>학교생활기록부Ⅱ 출력물로<br>2026년 기록 전 항목 점검</div>
   </div>
-  <table>
-    <tr><th>12/16(수) 집합 점검</th><th>2차 · 인접 담임</th><th>3차 · 부담임</th></tr>
-    <tr><td class="d">6교시 15:00~15:50</td><td><strong>과세특</strong></td><td>창체 (자율자치·진로·동아리)</td></tr>
-    <tr><td class="d">7교시 16:00~16:50</td><td>창체 (자율자치·진로·동아리)</td><td><strong>과세특</strong></td></tr>
+  <div class="scope">📌 점검 범위 — <b>2026학년도(올해)에 기재한 내용</b>을 중점으로 봐요. <span>학교생활기록부Ⅱ 출력물에서 올해 학년 기록만 확인해요.</span></div>
+  <table class="who-when">
+    <tr><th>12/16(수) 집합점검</th><th>6교시</th><th>7교시</th></tr>
+    <tr><td class="d">2차 · 인접 담임<br><span class="sub" style="margin:0;font-weight:600">바로 앞 반 담임 (1반은 8반 담임)</span></td><td><strong>앞번호 절반</strong><br><span class="sub" style="margin:0">예: 1~10번</span></td><td><strong>뒷번호 절반</strong><br><span class="sub" style="margin:0">예: 11~20번</span></td></tr>
+    <tr><td class="d">3차 · 부담임</td><td><strong>뒷번호 절반</strong><br><span class="sub" style="margin:0">예: 11~20번</span></td><td><strong>앞번호 절반</strong><br><span class="sub" style="margin:0">예: 1~10번</span></td></tr>
   </table>
-  <p class="foot"><strong>집중 점검 기간 12/14~12/23</strong> · 점검표와 <strong>점검표지</strong>는 <span class="hl">12/23(수) 16:50(퇴청 전)까지</span> 담당자에게 꼭 제출해요.</p>
+  <p class="foot" style="margin-top:1.2vh">학생 수를 번호순으로 반씩 나눠, 두 사람이 6·7교시에 서로 바꿔 보면 <strong>반 전체를 2번씩</strong> 점검하게 돼요. (20명 기준 예시)</p>
+  
+  <p class="foot"><strong>집중 점검 기간 12/14~12/23</strong> · 점검은 <strong>자체점검표(온라인)</strong>에 접속해 문항별 ○와 손글씨 서명으로 제출해요. 마감 <span class="hl">12/23(수) 16:50(퇴청 전)</span><br><span class="sub" style="margin:0">1검 담임 · 2검 인접 담임(바로 앞 반, 1반은 8반) · 3검 부담임 — 다시 제출하면 마지막 제출로 바뀌어요.</span></p>
 </div></section>
 
 <!-- 05 -->
@@ -247,7 +254,7 @@ footer .cur{flex:1;font-size:14px;font-weight:700;white-space:nowrap;overflow:hi
       <div class="v">1차 점검 완료를 확인하고<br>진급/졸업사정회를 열어요.</div>
       <div class="when"><span class="chip">12/18(금)</span></div></div>
     <div class="row"><div class="k">점검표 제출</div>
-      <div class="v">점검표·<strong>점검표지</strong>를 담당자에게 제출해요.<br><span class="hl">12/23(수) 16:50(퇴청 전)까지</span></div>
+      <div class="v"><strong>자체점검표(온라인)</strong>에 ○ 표시와 서명을 제출해요.<br><span class="hl">12/23(수) 16:50(퇴청 전)까지</span> · 종이 점검표는 내지 않아요.</div>
       <div class="when"><span class="chip">12/23(수)</span></div></div>
     <div class="row"><div class="k">교육청</div>
       <div class="v">자체점검표 제출 <span class="hl">1/6(수) 17:00까지</span><br>현장점검단 방문 점검과 컨설팅</div>
